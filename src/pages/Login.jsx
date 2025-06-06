@@ -40,9 +40,10 @@ export default function Login() {
     }
 
     try {
-      console.log('Sending login request to:', 'https://task-backend.onrender.com/auth/login');
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      console.log('Sending login request to:', `${apiUrl}/auth/login`);
       console.log('Login payload:', form);
-      const res = await axios.post('https://task-backend.onrender.com/auth/login', form, { withCredentials: true });
+      const res = await axios.post(`${apiUrl}/auth/login`, form, { withCredentials: true });
       console.log('Login response:', res.data);
       if (res.data.success && res.data.token) {
         localStorage.setItem('token', res.data.token);
